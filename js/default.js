@@ -5,7 +5,7 @@ const diceButton = document.querySelector('.dice-button');
 function getAdvice() {
   // Get data via Fetch API
   if (window.fetch) {
-    fetch('https://api.adviceslip.com/advice', { method: 'GET' })
+    fetch('https://api.adviceslip.com/advice', { method: 'GET', cache: 'no-cache' })
       .then(response => response.json())
       .then(response => {
         adviceNumber.innerHTML = response.slip.id;
@@ -19,6 +19,7 @@ function getAdvice() {
         const xhr = new XMLHttpRequest();
         xhr.open(method, url);
         xhr.responseType = 'json';
+        xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.onload = () => {
           if (xhr.status >= 400) {
             reject(xhr.response);
