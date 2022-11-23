@@ -1,0 +1,108 @@
+:root {
+  --color-primary-light-cyan: hsl(193, 38%, 86%);
+  --color-primary-neon-green: hsl(150, 100%, 66%);
+  --color-neutral-gray-blue: hsl(217, 19%, 38%);
+  --color-neutral-dark-gray-blue: hsl(217, 19%, 24%);
+  --color-neutral-dark-blue: hsl(218, 23%, 16%);
+  --font-family: 'Manrope', sans-serif; /* 800 */
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font: 800 1rem var(--font-family);
+  background-color: var(--color-neutral-dark-blue);
+  color: white;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1em;
+}
+
+main {
+  position: relative;
+  background-color: var(--color-neutral-dark-gray-blue);
+  color: var(--color-primary-light-cyan);
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 20px 30px hsla(0, 0%, 0%, 0.2);
+  padding: 1em 1em 4em 1em;
+  max-width: 34em;
+}
+
+.advice-number-label {
+  color: var(--color-primary-neon-green);
+  font-size: 0.7em;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+#advice-quote {
+  font-size: 1.75em;
+}
+
+.dice-button {
+  position: absolute;
+  bottom: -2.5em;
+  left: calc(50% - 2.5em);
+  width: 5em;
+  height: 5em;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-primary-neon-green);
+  cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 0.3s;
+}
+
+.dice-button > img {
+  vertical-align: middle;
+  object-fit: contain;
+  object-position: center;
+}
+
+.dice-button:hover {
+  box-shadow: 0 0 30px hsla(150, 100%, 66%, 0.8);
+}
+
+.dice-button:focus {
+  outline: 4px solid white;
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+.dice-button:hover > img {
+  animation: 0.8s spin;
+}
+
+/* Responsive media queries */
+
+@media (min-width: 576px) {
+  main {
+    padding: 2.5em 2.5em 4em 2.5em;
+  }
+
+  .advice-number-label {
+    font-size: 0.8em;
+  }
+
+  #advice-quote {
+    font-size: 2em;
+  }
+}
