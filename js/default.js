@@ -2,14 +2,20 @@ const adviceNumber = document.getElementById('advice-number');
 const adviceText = document.getElementById('advice-quote');
 const diceButton = document.querySelector('.dice-button');
 
+const apiURL = 'https://api.adviceslip.com/advice';
+
+function updateHTML(slipID, slipAdvice) {
+  adviceNumber.innerHTML = slipID;
+  adviceText.innerHTML = "&ldquo;" + slipAdvice + "&rdquo;";
+}
+
 function getAdvice() {
   // Get data via Fetch API
   if (window.fetch) {
-    fetch('https://api.adviceslip.com/advice', { method: 'GET', cache: 'no-cache' })
+    fetch(apiURL, { method: 'GET', cache: 'no-cache' })
       .then(response => response.json())
-      .then(response => {
-        adviceNumber.innerHTML = response.slip.id;
-        adviceText.innerHTML = "&ldquo;" + response.slip.advice + "&rdquo;";
+      .then(data => {
+        updateHTML(data.slip.id, data.slip.advice);
       })
       .catch(err => console.error(err));
   } else {
@@ -32,11 +38,10 @@ function getAdvice() {
     };
     const getData = async () => {
       try {
-        const response = await sendRequest('GET', 'https://api.adviceslip.com/advice');
-        adviceNumber.innerHTML = response.slip.id;
-        adviceText.innerHTML = "&ldquo;" + response.slip.advice + "&rdquo;";
+        const response = await sendRequest('GET', apiURL);
+        updateHTML(response.slip.id, response.slip.advice);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
     getData();
